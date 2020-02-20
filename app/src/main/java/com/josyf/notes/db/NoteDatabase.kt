@@ -1,18 +1,14 @@
 package com.josyf.notes.db
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.RoomDatabase
 
 @Database(
     entities = [Note::class],
     version = 1
 )
 
-abstract class NoteDatabase {
-    // now create functions to get our DAOs. we've only got 1 here
-    abstract fun getNoteDao() : NoteDAO
-
-    // now to build the room db
-    companion object {
-        private val instance : NoteDatabase? = null
-    }
+abstract class NoteDatabase : RoomDatabase(){
+    abstract fun noteDao() : NoteDAO
 }
