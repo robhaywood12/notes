@@ -7,14 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 import com.josyf.notes.R
+import com.josyf.notes.db.Note
+import com.josyf.notes.db.NoteDatabase
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass.
  */
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,11 +31,25 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        recycler_view_notes.setHasFixedSize(true)
+        recycler_view_notes.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+
+        launch {
+            context?.let{
+                val notes = NoteDatabase(it).noteDao().getAllNotes()
+                recycler_view_notes.adapter = NotesAdapter(notes)
+
+            }
+        }
+
         button_add.setOnClickListener{
             //get the nav action from our nav graph
 
             val action = HomeFragmentDirections.actionAddNote()
             Navigation.findNavController(it).navigate(action)
+
+
+
         }
     }
 

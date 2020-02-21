@@ -10,9 +10,10 @@ import androidx.room.PrimaryKey
 data class Note(
     // define the attributes that we need. We creating our table
     // Let's make our id the primarykey
+    val noteTitle: String,
+    val noteBody: String
+){
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    val title: String,
-    val note: String
+    var id: Int = 0
+}
 
-)
