@@ -1,9 +1,6 @@
 package com.josyf.notes.db
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface NoteDAO {
@@ -20,4 +17,7 @@ interface NoteDAO {
 
     @Delete
     suspend fun delete(note: Note)
+
+    @Update
+    suspend fun updateNote(note: Note)
 }

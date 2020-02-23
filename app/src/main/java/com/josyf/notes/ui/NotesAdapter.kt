@@ -3,6 +3,7 @@ package com.josyf.notes.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.josyf.notes.R
 import com.josyf.notes.db.Note
@@ -26,6 +27,13 @@ class NotesAdapter(val notes: List<Note>) : RecyclerView.Adapter<NotesAdapter.No
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         holder.view.text_view_title.text = notes[position].noteTitle
         holder.view.text_view_body.text = notes[position].noteBody
+
+        //area for updating
+        holder.view.setOnClickListener{
+            val action = HomeFragmentDirections.actionAddNote()
+            action.note = notes[position]
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     class NoteViewHolder(val view: View) : RecyclerView.ViewHolder(view)

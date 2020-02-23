@@ -2,6 +2,7 @@ package com.josyf.notes.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 // Firstly, make this a data class.
 // This will be our entity. So, we insert @Entity
@@ -12,7 +13,7 @@ data class Note(
     // Let's make our id the primarykey
     val noteTitle: String,
     val noteBody: String
-){
+):Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 }
